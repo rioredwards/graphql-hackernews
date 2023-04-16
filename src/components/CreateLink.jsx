@@ -28,17 +28,22 @@ const CreateLink = () => {
       url: formState.url,
     },
     update: (cache, { data: { post } }) => {
+      // Read the current data from the cache
       const data = cache.readQuery({
         query: FEED_QUERY,
       });
 
+      // Add the new link to the data
+      const updatedData = {
+        feed: {
+          links: [post, ...data.feed.links],
+        },
+      };
+
+      // Write the updated data back to the cache
       cache.writeQuery({
         query: FEED_QUERY,
-        data: {
-          feed: {
-            links: [post, ...data.feed.links],
-          },
-        },
+        data: updatedData,
       });
     },
     onCompleted: () => navigate("/"),
