@@ -45,6 +45,7 @@ const wsLink = new WebSocketLink({
 
 // split is used to “route” a request to a specific middleware link.
 // if the query is a subscription, use the wsLink, otherwise use the httpLink
+// parameters basically form a ternary operator
 const link = split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
