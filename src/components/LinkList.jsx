@@ -76,6 +76,7 @@ const LinkList = () => {
 
   const { data, loading, error, subscribeToMore } = useQuery(FEED_QUERY, {
     variables: getQueryVariables(isNewPage, page),
+    fetchPolicy: "cache-and-network",
   });
 
   subscribeToMore({
