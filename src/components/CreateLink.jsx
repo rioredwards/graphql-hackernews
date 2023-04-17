@@ -28,24 +28,24 @@ const CreateLink = () => {
       url: formState.url,
     },
     update: (cache, { data: { post } }) => {
-      // Read the current data from the cache
+      // Read the data from our cache for this query.
       const data = cache.readQuery({
         query: FEED_QUERY,
       });
 
-      // Add the new link to the data
-      const updatedData = {
-        feed: {
-          links: [post, ...data.feed.links],
-        },
-      };
-
-      // Write the updated data back to the cache
-      cache.writeQuery({
-        query: FEED_QUERY,
-        data: updatedData,
-      });
+      // Add our link from the mutation to the end.
+      if (data && data.feed) {
+        cache.writeQuery({
+          query: FEED_QUERY,
+          data: {
+            feed: {
+              links: [post, ...data.feed.links],
+            },
+          },
+        });
+      }
     },
+    // Navigate to the home page after the mutation is completed
     onCompleted: () => navigate("/"),
   });
 
