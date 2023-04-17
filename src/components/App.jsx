@@ -1,7 +1,6 @@
 import React from "react";
 import CreateLink from "./CreateLink";
 import Header from "./Header";
-import LinkList from "./LinkList";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import Search from "./Search";
@@ -16,7 +15,7 @@ const App = () => {
 
           <Route path="/create" element={<CreateLink />} />
           <Route path="/login" element={<Login />} />
-          {/* <Route path="/search" element={<Search />} /> */}
+          <Route path="/search" element={<Search />} />
         </Routes>
       </div>
     </div>
